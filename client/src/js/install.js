@@ -1,18 +1,22 @@
 const butInstall = document.getElementById('buttonInstall');
-// let deferredPrompt;
 
-window.addEventListener('beforeinstallprompt', (event) => {
+function beforeInstallPrompt(event) {
   event.preventDefault();
-  // deferredPrompt = event;
-  butInstall.style.visibility = 'visible';
-  butInstall.textContent = 'Install'
-});
+  window.deferredPrompt = event;
+  butInstall.classList.remove('hidden');
+}
 
-butInstall.addEventListener('click', async () => {
-  butInstall.setAttribute('disabled', true);
-  butInstall.textContent = 'Installed';
-});
+function buttonClick() {
+  if(!window.deferredPrompt) return;
+  window.deferredPrompt.prompt();
+  window.deferredPrompt = null;
+  butInstall.classList.add('hidden');
+}
 
-window.addEventListener('appinstalled', (event) => {
-  console.log('J.A.T.E. was installed successfully.', event);
-});
+function appInstalled() {
+  window.deferredPrompt = null;
+}
+
+window.addEventListener('beforeinstallprompt', beforeInstallPrompt);
+butInstall.addEventListener('click', buttonClick);
+window.addEventListener('appinstalled', appInstalled);

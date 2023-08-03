@@ -1,37 +1,52 @@
 import { openDB } from 'idb';
 
-const initdb = async () =>
-  openDB('jate', 1, {
-    upgrade(db) {
-      if (db.objectStoreNames.contains('jate')) {
-        console.log('jate database already exists');
+const DATABASE_NAME = 'jate';
+const DATABASE_VERSION = 1;
+const OBJECT_STORE_NAME = 'jate';
+
+const initializeDatabase = async () => {
+    return openDB(DATABASE_NAME, DATABASE_VERSION, {
+        upgrade: upgradeDatabase,
+    });
+};
+
+function upgradeDatabase(db) {
+    if (db.objectStoreNames.contains(OBJECT_STORE_NAME)) {
+        console.log(`${OBJECT_STORE_NAME} database already exists`);
         return;
-      }
+    }
 
-      db.createObjectStore('jate', { keyPath: 'id', autoIncrement: true });
-      console.log('jate database created');
-    },
-});
-
+    db.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id', autoIncrement: true });
+    console.log(`${OBJECT_STORE_NAME} database created`);
+}
 
 export const putDb = async (content) => {
-  const dB = await openDB('jate', 1);
-  const tx = dB.transaction('jate', 'readwrite');
-  const store = tx.objectStore('jate');
-  const request = store.put({ id:1, value: content });
-  const result = await request;
-  console.log('Data saved', result);
+    const db = await openDB(DATABASE_NAME, DATABASE_VERSION);
+    const result = await saveDataToStore(db, content);
+
+    console.log('Data saved', result);
 };
 
+async function saveDataToStore(db, content) {
+    const transaction = db.transaction(OBJECT_STORE_NAME, 'readwrite');
+    const store = transaction.objectStore(OBJECT_STORE_NAME);
+
+    return store.put({ id: 1, value: content });
+}
 
 export const getDb = async () => {
-  const dB = await openDB('jate', 1);
-  const tx = dB.transaction('jate', 'readonly');
-  const store = tx.objectStore('jate');
-  const request = store.getAll();
-  const result = await request;
-  console.log('Data retrieved', result);
-  return result;
+    const db = await openDB(DATABASE_NAME, DATABASE_VERSION);
+    const result = await getAllDataFromStore(db);
+
+    console.log('Data retrieved', result);
+    return result;
 };
 
-initdb();
+async function getAllDataFromStore(db) {
+    const transaction = db.transaction(OBJECT_STORE_NAME, 'readonly');
+    const store = transaction.objectStore(OBJECT_STORE_NAME);
+
+    return store.getAll();
+}
+
+initializeDatabase();
