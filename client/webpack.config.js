@@ -14,40 +14,56 @@ module.exports = () => {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
+    
     plugins: [
-      new HtmlWebpackPlugin({ template: './index.html' }),
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        title: 'Just Another Text Editor',
+      }),
+
       new InjectManifest({
         swSrc: './src-sw.js',
+        swDest: 'sw.js',
       }),
+
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: 'Just Another Text Editor',
-        short_name: 'J.A.T.E.',
-        description: 'A simple text editor PWA!',
+        short_name: 'Jate',
+        description: 'A text editor for the web and can be installed as a PWA',
         background_color: '#ffffff',
-        crossorigin: 'use-credentials',
+        theme_color: '#ffffff',
+        start_url: '/',
+        publicPath: '/',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
-            sizes: [96, 128, 192, 256, 384, 512]
-          }
-        ]
-      })
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      }),      
     ],
+
     module: {
-      rules: [
+      rules: 
+      [
         {
-          test: /\.js$/,
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
-            }
-          }
-        },
-        {
-          test: /\.css$/i,
-          use: ['style-loader', 'css-loader'],
+              presets : ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread',
+              '@babel/plugin-transform-runtime',]
+           },
+          },
         },
       ],
     },
