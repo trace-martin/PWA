@@ -15,20 +15,20 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      new HtmlWebpackPlugin({ template: './src/index.html' }),
+      new HtmlWebpackPlugin({ template: './index.html' }),
       new InjectManifest({
-        swSrc: './src/src-sw.js',
+        swSrc: './src-sw.js',
       }),
       new WebpackPwaManifest({
         name: 'Just Another Text Editor',
         short_name: 'J.A.T.E.',
         description: 'A simple text editor PWA!',
         background_color: '#ffffff',
-        crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+        crossorigin: 'use-credentials',
         icons: [
           {
-            src: path.resolve('src/assets/icon.png'),
-            sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512]
           }
         ]
       })
