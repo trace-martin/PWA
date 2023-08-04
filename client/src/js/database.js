@@ -4,6 +4,8 @@ const DATABASE_NAME = 'jate';
 const DATABASE_VERSION = 1;
 const OBJECT_STORE_NAME = 'jate';
 
+let dbPromise = initializeDatabase();
+
 const initializeDatabase = async () => {
     return openDB(DATABASE_NAME, DATABASE_VERSION, {
         upgrade: upgradeDatabase,
@@ -11,17 +13,16 @@ const initializeDatabase = async () => {
 };
 
 function upgradeDatabase(db) {
-    if (db.objectStoreNames.contains(OBJECT_STORE_NAME)) {
+    if (!db.objectStoreNames.contains(OBJECT_STORE_NAME)) {
+        db.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id', autoIncrement: true });
+        console.log(`${OBJECT_STORE_NAME} database created`);
+    } else {
         console.log(`${OBJECT_STORE_NAME} database already exists`);
-        return;
     }
-
-    db.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id', autoIncrement: true });
-    console.log(`${OBJECT_STORE_NAME} database created`);
 }
 
 export const putDb = async (content) => {
-    const db = await openDB(DATABASE_NAME, DATABASE_VERSION);
+    const db = await dbPromise;
     const result = await saveDataToStore(db, content);
 
     console.log('Data saved', result);
@@ -35,7 +36,7 @@ async function saveDataToStore(db, content) {
 }
 
 export const getDb = async () => {
-    const db = await openDB(DATABASE_NAME, DATABASE_VERSION);
+    const db = await dbPromise;
     const result = await getAllDataFromStore(db);
 
     console.log('Data retrieved', result);
@@ -48,5 +49,3 @@ async function getAllDataFromStore(db) {
 
     return store.getAll();
 }
-
-initializeDatabase();
