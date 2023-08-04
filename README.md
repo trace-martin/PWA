@@ -1,14 +1,15 @@
-# 19 Progressive Web Applications (PWA): Text Editor
+# JATE - Just Another Text Editor
 
-## Your Task
+This project is a simple Progressive Web App (PWA) text editor called 'JATE' (Just Another Text Editor) that allows users to edit and save text in the browser.
 
-As you have progressed through this course, you have put together a number of impressive projects that you can show off to potential employers. This project is no exception; in fact, it features some of the most impressive expressions of the concepts you have learned so far.
+## Table of Contents
 
-Your task is to build a text editor that runs in the browser. The app will be a single-page application that meets the PWA criteria. Additionally, it will feature a number of data persistence techniques that serve as redundancy in case one of the options is not supported by the browser. The application will also function offline.
-
-To build this text editor, you will start with an existing application and implement methods for getting and storing data to an IndexedDB database. You will use a package called `idb`, which is a lightweight wrapper around the IndexedDB API. It features a number of methods that are useful for storing and retrieving data, and is used by companies like Google and Mozilla.
-
-You will deploy this full-stack application to Heroku using the [Heroku Deployment Guide on The Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/heroku/heroku-deployment-guide).
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## User Story
 
@@ -48,46 +49,44 @@ WHEN I deploy to Heroku
 THEN I should have proper build scripts for a webpack application
 ```
 
-JATE - Just Another Text Editor
-This project is a simple Progressive Web App (PWA) text editor called 'JATE' (Just Another Text Editor) that allows users to edit and save text in the browser.
-
-## Table of Contents
-[Features](#features)
-[Installation](#installation)
-[Usage](#usage)
-[Tech](#tech)
-[Contributing](#contributing)
-[License](#license)
-
 ## Features
+
 Edit and write code with syntax highlighting, line numbering and auto-indentation.
 Auto-save feature to keep your text safe.
 Data persistence using IndexedDB for offline use.
 Responsive UI that works on all screen sizes.
 PWA: Installable and works offline.
-Installation
+
+## Installation
+
 To install the project, follow these steps:
 
 Clone the repository: git clone https://github.com/<username>/jate.git
 Install the dependencies: npm install
 Start the development server: npm run start
 Visit http://localhost:8000 in your browser.
-Usage
+
+## Usage
+
 Once the app is installed and running:
 
 Edit the text/code in the editor.
 Your changes will be auto-saved and remain even after a page refresh.
 When offline, your data will be stored locally and synced when online.
-## Tech Stack
+
+## Technologies
+
 This project uses the following technologies:
 
-* Workbox
-* CodeMirror
-* IndexedDB
-* Webpack
+- Workbox
+- CodeMirror
+- IndexedDB
+- Webpack
 
 ## Contributing
+
 Contributions are welcome. Please fork the repository and create a pull request with your changes.
 
 ## License
+
 This project is licensed under the MIT License. See LICENSE for more information.
