@@ -48,95 +48,46 @@ WHEN I deploy to Heroku
 THEN I should have proper build scripts for a webpack application
 ```
 
-## Mock-Up
+JATE - Just Another Text Editor
+This project is a simple Progressive Web App (PWA) text editor called 'JATE' (Just Another Text Editor) that allows users to edit and save text in the browser.
 
-The following animation demonstrates the application functionality:
+## Table of Contents
+[Features](#features)
+[Installation](#installation)
+[Usage](#usage)
+[Tech](#tech)
+[Contributing](#contributing)
+[License](#license)
 
-![Demonstration of the finished Module 19 Challenge being used in the browser and then installed.](./Assets/00-demo.gif)
+## Features
+Edit and write code with syntax highlighting, line numbering and auto-indentation.
+Auto-save feature to keep your text safe.
+Data persistence using IndexedDB for offline use.
+Responsive UI that works on all screen sizes.
+PWA: Installable and works offline.
+Installation
+To install the project, follow these steps:
 
-The following image shows the application's `manifest.json` file:
+Clone the repository: git clone https://github.com/<username>/jate.git
+Install the dependencies: npm install
+Start the development server: npm run start
+Visit http://localhost:8000 in your browser.
+Usage
+Once the app is installed and running:
 
-![Demonstration of the finished Module 19 Challenge with a manifest file in the browser.](./Assets/01-manifest.png)
+Edit the text/code in the editor.
+Your changes will be auto-saved and remain even after a page refresh.
+When offline, your data will be stored locally and synced when online.
+## Tech Stack
+This project uses the following technologies:
 
-The following image shows the application's registered service worker:
+* Workbox
+* CodeMirror
+* IndexedDB
+* Webpack
 
-![Demonstration of the finished Module 19 Challenge with a registered service worker in the browser.](./Assets/02-service-worker.png)
+## Contributing
+Contributions are welcome. Please fork the repository and create a pull request with your changes.
 
-The following image shows the application's IndexedDB storage:
-
-![Demonstration of the finished Module 19 Challenge with a IndexedDB storage named 'jate' in the browser.](./Assets/03-idb-storage.png)
-
-## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This Challenge is graded based on the following criteria:
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the above acceptance criteria plus the following:
-
-  * Uses IndexedDB to create an object store and includes both GET and PUT methods
-
-  * The application works without an internet connection
-
-  * Automatically saves content inside the text editor when the DOM window is unfocused
-
-  * Bundled with webpack
-
-  * Create a service worker with workbox that Caches static assets
-
-  * The application should use babel in order to use async / await
-
-  * Application must have a generated `manifest.json` using the `WebpackPwaManifest` plug-in
-
-  * Can be installed as a Progressive Web Application
-
-### Deployment: 32%
-
-* Application deployed to Heroku at live URL with build scripts
-
-* Application loads with no errors
-
-* Application GitHub URL submitted
-
-* GitHub repo contains application code
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate
-
-* Application user interface style is clean and polished
-
-* Application resembles the mock-up functionality provided in the Challenge instructions
-
-### Repository Quality: 13%
-
-* Repository has a unique name
-
-* Repository follows best practices for file structure and naming conventions
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages
-
-* Repository contains quality README file with description, screenshot, and link to deployed application
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application
-
-* The URL of the GitHub repository, with a unique name and a README describing the project
-
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+## License
+This project is licensed under the MIT License. See LICENSE for more information.

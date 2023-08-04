@@ -4,7 +4,6 @@ const DATABASE_NAME = 'jate';
 const DATABASE_VERSION = 1;
 const OBJECT_STORE_NAME = 'jate';
 
-let dbPromise = initializeDatabase();
 
 const initializeDatabase = async () => {
     return openDB(DATABASE_NAME, DATABASE_VERSION, {
@@ -20,6 +19,8 @@ function upgradeDatabase(db) {
         console.log(`${OBJECT_STORE_NAME} database already exists`);
     }
 }
+
+export let dbPromise = initializeDatabase();
 
 export const putDb = async (content) => {
     const db = await dbPromise;
